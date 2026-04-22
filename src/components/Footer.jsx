@@ -1,28 +1,58 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { SITE_NAME } from "../constants/site.js";
 
 const social = [
   { href: "https://twitter.com", label: "Twitter", Icon: Twitter },
   { href: "https://github.com", label: "GitHub", Icon: Github },
   { href: "https://linkedin.com", label: "LinkedIn", Icon: Linkedin },
-  { href: "mailto:hello@codenova.tech", label: "Email", Icon: Mail },
+  { href: "mailto:hello@tothyo.it", label: "Email", Icon: Mail },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/80">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
-          <div className="text-center md:text-left">
-            <p className="text-lg font-semibold text-white">CodeNova Technologies</p>
-            <p className="mt-2 max-w-md text-sm text-slate-400">
-              We build scalable websites and mobile apps for teams that want to move fast without
-              sacrificing quality.
+    <footer className="border-t border-white/10 bg-slate-950">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div className="grid gap-10 border-b border-white/10 pb-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="text-lg font-semibold text-white">{SITE_NAME}</p>
+            <p className="mt-3 text-sm text-slate-400">
+              Premium website and mobile app development partner for growing businesses.
             </p>
           </div>
-          <div className="flex flex-col items-center gap-4 md:items-end">
-            <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Connect</p>
-            <div className="flex gap-3">
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Services</p>
+            <ul className="mt-3 space-y-2 text-sm text-slate-400">
+              <li>Web Development</li>
+              <li>App Development</li>
+              <li>UI/UX Design</li>
+              <li>E-commerce Solutions</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Company</p>
+            <div className="mt-3 flex flex-col gap-2 text-sm text-slate-400">
+              <Link to="/about" className="transition hover:text-white">
+                About Us
+              </Link>
+              <Link to="/services" className="transition hover:text-white">
+                Services
+              </Link>
+              <Link to="/contact" className="transition hover:text-white">
+                Contact
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Contact</p>
+            <div className="mt-3 space-y-2 text-sm text-slate-400">
+              <p>hello@tothyo.it</p>
+              <p>Dhaka, Bangladesh</p>
+            </div>
+            <div className="mt-4 flex gap-3">
               {social.map(({ href, label, Icon }) => (
                 <a
                   key={label}
@@ -30,23 +60,20 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-blue-500/40 hover:bg-blue-500/10 hover:text-white"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-white"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
         </div>
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-sm text-slate-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} CodeNova Technologies. All rights reserved.</p>
-          <div className="flex flex-wrap gap-6">
-            <Link to="/services" className="hover:text-slate-300">
-              Services
-            </Link>
-            <Link to="/contact" className="hover:text-slate-300">
-              Contact
-            </Link>
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 text-sm text-slate-500 sm:flex-row">
+          <p>
+            © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+          </p>
+          <div className="flex flex-wrap gap-4">
             <Link to="/admin" className="text-slate-600 hover:text-slate-400">
               Admin
             </Link>

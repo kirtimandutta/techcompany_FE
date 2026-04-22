@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import { submitContact } from "../lib/api.js";
+import { SITE_NAME } from "../constants/site.js";
 
 const initial = { name: "", email: "", phone: "", message: "" };
 
@@ -43,7 +44,7 @@ export default function Contact() {
     <>
       <SEO
         title="Contact"
-        description="Contact CodeNova Technologies for a quote on website or mobile app development."
+        description={`Contact ${SITE_NAME} for a quote on website or mobile app development.`}
       />
       <div className="relative pb-24">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
@@ -51,7 +52,7 @@ export default function Contact() {
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                Let&apos;s build something great
+                Let&apos;s build something great with {SITE_NAME}
               </h1>
               <p className="mt-4 text-lg text-slate-400">
                 Tell us about your project — we&apos;ll respond within one business day.

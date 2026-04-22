@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
+import { SITE_NAME } from "../constants/site.js";
 
 const links = [
   { to: "/", label: "Home" },
@@ -19,9 +20,7 @@ export default function Navbar() {
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/20">
             <Sparkles className="h-5 w-5 text-white" />
           </span>
-          <span className="text-lg text-white">
-            CodeNova<span className="text-gradient"> Technologies</span>
-          </span>
+          <span className="text-lg text-white">{SITE_NAME}</span>
         </NavLink>
 
         <nav className="hidden items-center gap-1 md:flex">

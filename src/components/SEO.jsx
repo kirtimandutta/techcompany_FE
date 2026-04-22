@@ -1,15 +1,16 @@
 import { useEffect } from "react";
-
-const defaultDesc =
-  "CodeNova Technologies builds scalable websites and mobile apps — Website Development, Mobile App Development, and custom digital products.";
-const siteName = "CodeNova Technologies";
+import {
+  DEFAULT_SEO_DESCRIPTION,
+  DEFAULT_SEO_TITLE,
+  SITE_NAME,
+} from "../constants/site.js";
 
 export default function SEO({
   title,
-  description = defaultDesc,
-  keywords = "web development, mobile app development, React, Node.js, CodeNova",
+  description = DEFAULT_SEO_DESCRIPTION,
+  keywords = "web development, mobile app development, React, Node.js, Tothyo.IT",
 }) {
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const fullTitle = title ? `${SITE_NAME} | ${title}` : DEFAULT_SEO_TITLE;
 
   useEffect(() => {
     document.title = fullTitle;

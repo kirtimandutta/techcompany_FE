@@ -1,5 +1,6 @@
 import { Target, Eye } from "lucide-react";
 import SEO from "../components/SEO.jsx";
+import { SITE_NAME } from "../constants/site.js";
 
 const team = [
   {
@@ -29,7 +30,7 @@ export default function About() {
     <>
       <SEO
         title="About Us"
-        description="Learn about CodeNova Technologies — our mission, vision, and the team behind scalable websites and mobile apps."
+        description={`Learn about ${SITE_NAME} — our mission, vision, and the team behind scalable websites and mobile apps.`}
       />
       <div className="relative pb-24">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-purple-600/10 blur-3xl" />
@@ -38,9 +39,9 @@ export default function About() {
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">About Us</h1>
               <p className="mt-6 text-lg leading-relaxed text-slate-400">
-                CodeNova Technologies is a product-minded engineering partner. We combine thoughtful
-                UX, solid architecture, and pragmatic delivery so your roadmap stays predictable —
-                whether you are launching a new brand site or shipping a mobile app to market.
+                {SITE_NAME} is a product-minded engineering partner. We combine thoughtful UX, solid
+                architecture, and pragmatic delivery so your roadmap stays predictable — whether you
+                are launching a new brand site or shipping a mobile app to market.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-slate-400">
                 Our teams work in tight feedback loops with stakeholders, focusing on outcomes: user

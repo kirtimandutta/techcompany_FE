@@ -20,4 +20,34 @@
       0 0 0 1px rgba(99, 102, 241, 0.15),
       0 12px 40px -12px rgba(59, 130, 246, 0.25);
   }
+  .hero-gradient {
+    background: linear-gradient(120deg, #020617, #0f172a, #0f1f46, #1d4ed8, #0f172a, #020617);
+    background-size: 300% 300%;
+  }
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-xl;
+  }
+  .hex-shape {
+    clip-path: polygon(
+      25% 6.7%,
+      75% 6.7%,
+      100% 50%,
+      75% 93.3%,
+      25% 93.3%,
+      0% 50%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
