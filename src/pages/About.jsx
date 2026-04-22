@@ -1,29 +1,69 @@
+import { useState } from "react";
 import { Target, Eye } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import { SITE_NAME } from "../constants/site.js";
 
+const withLocalImageFallback = (slug, fallback) => [
+  `/img/${slug}.jpg`,
+  `/img/${slug}.jpeg`,
+  `/img/${slug}.png`,
+  `/img/${slug}.webp`,
+  `/img/${slug}`,
+  fallback,
+];
+
 const team = [
   {
-    name: "Sarah Chen",
+    name: "Kirtiman Dutta",
     role: "Engineering Lead",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    images: withLocalImageFallback(
+      "kirtiman",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+    ),
   },
   {
-    name: "Marcus Webb",
-    role: "Product Design",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
+    name: "Sudeep Acharjee",
+    role: "VP Sales",
+    images: withLocalImageFallback(
+      "sudeep",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80"
+    ),
   },
   {
-    name: "Elena Vasquez",
-    role: "Mobile Lead",
-    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    name: "David Okonkwo",
-    role: "DevOps & Cloud",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
+    name: "Rajdeep Baruah",
+    role: "Designing Head",
+    images: withLocalImageFallback(
+      "rajdeep",
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+    ),
   },
 ];
+
+function TeamMemberCard({ member }) {
+  const [imageIndex, setImageIndex] = useState(0);
+  const currentImage = member.images[imageIndex] || member.images[member.images.length - 1];
+
+  return (
+    <div className="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/40 transition hover:border-blue-500/30">
+      <div className="aspect-square overflow-hidden">
+        <img
+          src={currentImage}
+          alt={member.name}
+          onError={() => {
+            if (imageIndex < member.images.length - 1) {
+              setImageIndex((prev) => prev + 1);
+            }
+          }}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-4">
+        <p className="font-semibold text-white">{member.name}</p>
+        <p className="text-sm text-slate-500">{member.role}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
@@ -83,24 +123,9 @@ export default function About() {
           <div className="mt-20">
             <h2 className="text-2xl font-bold text-white">Meet the team</h2>
             <p className="mt-2 text-slate-400">The people behind your builds.</p>
-            <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((member) => (
-                <div
-                  key={member.name}
-                  className="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/40 transition hover:border-blue-500/30"
-                >
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="font-semibold text-white">{member.name}</p>
-                    <p className="text-sm text-slate-500">{member.role}</p>
-                  </div>
-                </div>
+                <TeamMemberCard key={member.name} member={member} />
               ))}
             </div>
           </div>

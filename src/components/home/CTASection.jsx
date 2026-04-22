@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { openDefaultWhatsAppChat } from "../../lib/whatsapp.js";
 
 export default function CTASection() {
   return (
@@ -20,13 +20,14 @@ export default function CTASection() {
                 Ready to build your next big idea?
               </h2>
             </div>
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={openDefaultWhatsAppChat}
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100"
             >
               Start Your Project
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
           </div>
         </motion.div>
       </div>

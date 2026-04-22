@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import SEO from "../components/SEO.jsx";
-import { submitContact } from "../lib/api.js";
 import { SITE_NAME } from "../constants/site.js";
+import { openWhatsAppWithMessage } from "../lib/whatsapp.js";
 
 const initial = { name: "", email: "", phone: "", message: "" };
 
@@ -25,15 +25,16 @@ export default function Contact() {
     setSuccess(null);
     setError(null);
     try {
-      const data = await submitContact(form);
-      setSuccess(data.message || "Message sent successfully.");
+      const message = `Hello, my name is ${form.name}. Email: ${form.email}. Phone: ${form.phone}. Message: ${form.message}`;
+      setSuccess("Redirecting you to WhatsApp...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const opened = openWhatsAppWithMessage(message);
+      if (!opened) {
+        throw new Error("Could not open WhatsApp. Please allow popups and try again.");
+      }
       setForm(initial);
     } catch (err) {
-      const msg =
-        err.response?.data?.message ||
-        err.response?.data?.errors?.map((x) => x.msg).join(" ") ||
-        err.message ||
-        "Could not send message. Please try again.";
+      const msg = err.message || "Could not open WhatsApp. Please try again.";
       setError(msg);
     } finally {
       setLoading(false);
@@ -149,10 +150,10 @@ export default function Contact() {
                   {loading ? (
                     <>
                       <Loader2 className="h-5 w-5 animate-spin" />
-                      Sending…
+                      Redirecting…
                     </>
                   ) : (
-                    "Submit"
+                    "Submit on WhatsApp"
                   )}
                 </button>
               </form>

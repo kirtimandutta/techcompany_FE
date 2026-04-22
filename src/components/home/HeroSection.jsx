@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { openDefaultWhatsAppChat } from "../../lib/whatsapp.js";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -58,13 +59,21 @@ export default function HeroSection() {
             variants={fadeUp}
             className="mt-8 flex flex-wrap gap-4"
           >
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={openDefaultWhatsAppChat}
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-xl shadow-blue-950/30 transition hover:-translate-y-0.5 hover:bg-slate-100"
             >
               Get a Quote
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
+            <button
+              type="button"
+              onClick={openDefaultWhatsAppChat}
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/50 bg-emerald-500/15 px-6 py-3 text-sm font-semibold text-emerald-100 transition hover:-translate-y-0.5 hover:bg-emerald-500/25"
+            >
+              Chat on WhatsApp
+            </button>
             <Link
               to="/services"
               className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"

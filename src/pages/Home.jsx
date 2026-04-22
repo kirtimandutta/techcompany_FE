@@ -13,42 +13,44 @@ export default function Home() {
       <SEO title="Website & App Development" />
       <SpaceshipHero />
       <HeroSection />
-      <HexGrid />
-      <StatsSection />
+      <div className="relative z-20">
+        <HexGrid />
+        <StatsSection />
 
-      <section className="relative overflow-hidden border-y border-white/10 py-20 sm:py-24">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1800&q=80"
-            alt="Mission background"
-            loading="lazy"
-            className="h-full w-full object-cover opacity-35"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/85 to-blue-950/90" />
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative mx-auto max-w-4xl px-4 text-center sm:px-6"
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">
-            Our Mission
-          </p>
-          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-            Helping businesses scale through impactful digital products
-          </h2>
-          <p className="mx-auto mt-5 max-w-3xl text-slate-200">
-            We partner with startups and established teams to design, build, and optimize
-            high-performing websites and mobile apps that turn traffic into growth and ideas into
-            sustainable products.
-          </p>
-        </motion.div>
-      </section>
+        <section className="relative overflow-hidden border-y border-white/10 py-20 sm:py-24">
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1800&q=80"
+              alt="Mission background"
+              loading="lazy"
+              className="h-full w-full object-cover opacity-35"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/85 to-blue-950/90" />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative mx-auto max-w-4xl px-4 text-center sm:px-6"
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">
+              Our Mission
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+              Helping businesses scale through impactful digital products
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl text-slate-200">
+              We partner with startups and established teams to design, build, and optimize
+              high-performing websites and mobile apps that turn traffic into growth and ideas into
+              sustainable products.
+            </p>
+          </motion.div>
+        </section>
 
-      <Testimonials />
-      <CTASection />
+        <Testimonials />
+        <CTASection />
+      </div>
     </div>
   );
 }

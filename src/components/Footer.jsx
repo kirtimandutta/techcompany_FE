@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
-import { SITE_NAME } from "../constants/site.js";
+import { LOGO_PATH, SITE_NAME } from "../constants/site.js";
+import { openDefaultWhatsAppChat } from "../lib/whatsapp.js";
 
 const social = [
   { href: "https://twitter.com", label: "Twitter", Icon: Twitter },
   { href: "https://github.com", label: "GitHub", Icon: Github },
   { href: "https://linkedin.com", label: "LinkedIn", Icon: Linkedin },
-  { href: "mailto:hello@tothyo.it", label: "Email", Icon: Mail },
+  { href: "mailto:tothyo.inweb@gmail.com", label: "Email", Icon: Mail },
 ];
 
 export default function Footer() {
@@ -15,7 +16,10 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 border-b border-white/10 pb-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-lg font-semibold text-white">{SITE_NAME}</p>
+            <div className="flex items-center gap-3">
+              <img src={LOGO_PATH} alt={`${SITE_NAME} logo`} className="h-10 w-10 rounded-lg object-cover" />
+              <p className="text-lg font-semibold text-white">{SITE_NAME}</p>
+            </div>
             <p className="mt-3 text-sm text-slate-400">
               Premium website and mobile app development partner for growing businesses.
             </p>
@@ -49,9 +53,16 @@ export default function Footer() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Contact</p>
             <div className="mt-3 space-y-2 text-sm text-slate-400">
-              <p>hello@tothyo.it</p>
-              <p>Dhaka, Bangladesh</p>
+              <p>tothyo.inweb@gmail.com</p>
+              <p>DCB Road, Tarajan, Jorhat, Assam 785001</p>
             </div>
+            <button
+              type="button"
+              onClick={openDefaultWhatsAppChat}
+              className="mt-4 inline-flex items-center rounded-lg border border-emerald-300/50 bg-emerald-500/15 px-4 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-500/25"
+            >
+              Chat on WhatsApp
+            </button>
             <div className="mt-4 flex gap-3">
               {social.map(({ href, label, Icon }) => (
                 <a
@@ -73,11 +84,6 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/admin" className="text-slate-600 hover:text-slate-400">
-              Admin
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X, Sparkles } from "lucide-react";
-import { SITE_NAME } from "../constants/site.js";
+import { Menu, X } from "lucide-react";
+import { LOGO_PATH, SITE_NAME } from "../constants/site.js";
 
 const links = [
   { to: "/", label: "Home" },
@@ -17,9 +17,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <NavLink to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/20">
-            <Sparkles className="h-5 w-5 text-white" />
-          </span>
+          <img src={LOGO_PATH} alt={`${SITE_NAME} logo`} className="h-9 w-9 rounded-lg object-cover" />
           <span className="text-lg text-white">{SITE_NAME}</span>
         </NavLink>
 

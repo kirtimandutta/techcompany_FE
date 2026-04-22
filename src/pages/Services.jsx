@@ -5,8 +5,10 @@ import {
   Smartphone,
   Apple,
   Layers,
+  MessageCircle,
 } from "lucide-react";
 import SEO from "../components/SEO.jsx";
+import { openDefaultWhatsAppChat } from "../lib/whatsapp.js";
 
 const web = [
   {
@@ -71,6 +73,14 @@ export default function Services() {
             <p className="mt-4 text-lg text-slate-400">
               End-to-end delivery across web and mobile — from discovery to launch and beyond.
             </p>
+            <button
+              type="button"
+              onClick={openDefaultWhatsAppChat}
+              className="mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-300/50 bg-emerald-500/15 px-5 py-3 text-sm font-semibold text-emerald-100 transition hover:-translate-y-0.5 hover:bg-emerald-500/25"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </button>
           </div>
 
           <div className="mt-16">

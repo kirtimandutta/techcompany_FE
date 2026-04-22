@@ -52,8 +52,8 @@ export default function HexCard({ title, image, index }) {
         className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-950/60 to-slate-950/95 transition group-hover:from-slate-900/20" />
-      <div className="absolute inset-x-0 bottom-0 p-4">
-        <h3 className="text-sm font-semibold text-white md:text-base">{title}</h3>
+      <div className="absolute inset-x-0 bottom-0 p-4 text-center">
+        <h3 className="text-sm font-semibold leading-tight text-white md:text-base">{title}</h3>
         <Link
           to="/services"
           className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-cyan-300 transition group-hover:text-cyan-200"
