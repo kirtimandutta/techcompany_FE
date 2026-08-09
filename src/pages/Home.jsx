@@ -4,6 +4,7 @@ import SpaceshipHero from "../components/home/SpaceshipHero.jsx";
 import HeroSection from "../components/home/HeroSection.jsx";
 import HexGrid from "../components/home/HexGrid.jsx";
 import StatsSection from "../components/home/StatsSection.jsx";
+import FeaturedShowcase from "../components/home/FeaturedShowcase.jsx";
 import Testimonials from "../components/home/Testimonials.jsx";
 import CTASection from "../components/home/CTASection.jsx";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <div className="relative z-20">
         <HexGrid />
         <StatsSection />
+        <FeaturedShowcase />
 
         <section className="relative overflow-hidden border-y border-white/10 py-20 sm:py-24">
           <div className="absolute inset-0">
