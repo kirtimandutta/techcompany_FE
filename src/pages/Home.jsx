@@ -16,8 +16,8 @@ export default function Home() {
       <HeroSection />
       <div className="relative z-20">
         <HexGrid />
-        <StatsSection />
         <FeaturedShowcase />
+        <StatsSection />
 
         <section className="relative overflow-hidden border-y border-white/10 py-20 sm:py-24">
           <div className="absolute inset-0">
