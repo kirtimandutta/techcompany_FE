@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail } from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "../constants/site.js";
 import { openDefaultWhatsAppChat } from "../lib/whatsapp.js";
 
+const CONTACT_EMAIL = "tothyo.inweb@gmail.com";
+
 const social = [
-  { href: "https://twitter.com", label: "Twitter", Icon: Twitter },
-  { href: "https://github.com", label: "GitHub", Icon: Github },
-  { href: "https://linkedin.com", label: "LinkedIn", Icon: Linkedin },
-  { href: "mailto:tothyo.inweb@gmail.com", label: "Email", Icon: Mail },
+  {
+    href: "https://www.instagram.com/tothyoit.in/",
+    label: "Instagram",
+    Icon: Instagram,
+  },
+  {
+    href: "https://www.facebook.com/people/TothyoIN/61567907544628/",
+    label: "Facebook",
+    Icon: Facebook,
+  },
+  {
+    href: "https://www.linkedin.com/in/tothyoit-services-a54771428",
+    label: "LinkedIn",
+    Icon: Linkedin,
+  },
 ];
 
 export default function Footer() {
@@ -53,7 +66,13 @@ export default function Footer() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Contact</p>
             <div className="mt-3 space-y-2 text-sm text-slate-400">
-              <p>tothyo.inweb@gmail.com</p>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-center gap-2 transition hover:text-white"
+              >
+                <Mail className="h-4 w-4 shrink-0" aria-hidden />
+                <span>{CONTACT_EMAIL}</span>
+              </a>
               <p>DCB Road, Tarajan, Jorhat, Assam 785001</p>
             </div>
             <button

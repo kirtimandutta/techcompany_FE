@@ -1,29 +1,19 @@
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Center, Environment, Html, useGLTF } from "@react-three/drei";
+import { Center, useGLTF } from "@react-three/drei";
 import * as easing from "maath/easing";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
 
-const MODEL_PATH =
-  "/3d/Intergalactic_Spaceships_Version_2/GLTF_EMBEDDED/Intergalactic_Spaceships_Version_2.gltf";
+// Optimized meshopt GLB (textures downscaled from 4K).
+const MODEL_PATH = "/3d/spaceship.glb";
 const THRUSTER_HINT = /(thruster|engine|exhaust|nozzle|reactor|jet)/i;
-
-function Loader() {
-  return (
-    <Html center>
-      <div className="rounded-full border border-white/20 bg-slate-900/80 px-3 py-1 text-xs uppercase tracking-wider text-slate-200">
-        Loading ship...
-      </div>
-    </Html>
-  );
-}
 
 function tuneMaterial(material, isThruster = false) {
   if (!material || Array.isArray(material)) return;
   if ("envMapIntensity" in material) {
-    material.envMapIntensity = 2.6;
+    material.envMapIntensity = 1.4;
   }
   if (isThruster && "emissive" in material) {
     material.emissive = new THREE.Color("#38bdf8");
@@ -40,14 +30,16 @@ function SpaceshipModel() {
     rotation: { x: -0.14, y: -0.98, z: 0.08 },
     scale: 0.5,
   });
-  const { scene } = useGLTF(MODEL_PATH);
+  // false = skip Draco CDN; true = enable meshopt decode for spaceship.glb
+  const { scene } = useGLTF(MODEL_PATH, false, true);
   const shipScene = useMemo(() => scene.clone(true), [scene]);
 
   useEffect(() => {
     shipScene.traverse((obj) => {
       if (!obj.isMesh) return;
-      obj.castShadow = true;
-      obj.receiveShadow = true;
+      // Shadows are expensive on first paint; keep the ship unshadowed for faster GPU setup.
+      obj.castShadow = false;
+      obj.receiveShadow = false;
 
       const materialName = obj.material?.name || "";
       const isThruster = THRUSTER_HINT.test(obj.name) || THRUSTER_HINT.test(materialName);
@@ -123,30 +115,55 @@ function SpaceshipModel() {
   );
 }
 
-useGLTF.preload(MODEL_PATH);
+useGLTF.preload(MODEL_PATH, false, true);
 
 export default function SpaceshipHero() {
+  // Defer WebGL mount so the page shell paints before the heavy 3D bundle work.
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const enable = () => {
+      if (!cancelled) setReady(true);
+    };
+
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(enable, { timeout: 600 });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback?.(id);
+      };
+    }
+
+    const timer = window.setTimeout(enable, 150);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div className="pointer-events-none fixed inset-0 z-10" aria-hidden>
-      <Canvas
-        shadows
-        dpr={[1, 1.8]}
-        camera={{ position: [0, 0.75, 8], fov: 34 }}
-        gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
-      >
-        <ambientLight intensity={0.4} />
-        <directionalLight
-          position={[4, 5, 3]}
-          intensity={1.6}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-        />
-        <Suspense fallback={<Loader />}>
-          <Environment preset="night" intensity={2.4} />
-          <SpaceshipModel />
-        </Suspense>
-      </Canvas>
+      {ready ? (
+        <Canvas
+          dpr={[1, 1.25]}
+          camera={{ position: [0, 0.75, 8], fov: 34 }}
+          gl={{
+            antialias: false,
+            powerPreference: "high-performance",
+            alpha: true,
+            stencil: false,
+            depth: true,
+          }}
+        >
+          <ambientLight intensity={0.55} />
+          <directionalLight position={[4, 5, 3]} intensity={1.85} />
+          <hemisphereLight args={["#93c5fd", "#020617", 0.55]} />
+          <Suspense fallback={null}>
+            <SpaceshipModel />
+          </Suspense>
+        </Canvas>
+      ) : null}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-transparent to-slate-950/70" />
     </div>
   );

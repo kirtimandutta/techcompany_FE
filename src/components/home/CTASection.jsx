@@ -4,14 +4,14 @@ import { openDefaultWhatsAppChat } from "../../lib/whatsapp.js";
 
 export default function CTASection() {
   return (
-    <section className="pb-24 pt-8">
+    <section className="relative z-20 pb-24 pt-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-violet-600/20 p-8 shadow-[0_30px_60px_-40px_rgba(59,130,246,0.95)] backdrop-blur-sm sm:p-12"
+          className="relative z-20 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-violet-600/20 p-8 shadow-[0_30px_60px_-40px_rgba(59,130,246,0.95)] backdrop-blur-md sm:p-12"
         >
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>

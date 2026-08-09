@@ -14,14 +14,14 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative isolate flex min-h-[calc(100vh-5rem)] items-center overflow-hidden">
+    <section className="relative z-20 flex min-h-[calc(100vh-5rem)] items-center overflow-hidden">
       <motion.div
         aria-hidden
-        className="hero-gradient absolute inset-0 z-0"
+        className="hero-gradient absolute inset-0 z-0 opacity-55"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
       />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.35),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.28),transparent_35%),radial-gradient(circle_at_50%_95%,rgba(14,165,233,0.22),transparent_40%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.28),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.2),transparent_35%),radial-gradient(circle_at_50%_95%,rgba(14,165,233,0.16),transparent_40%)]" />
 
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
         <div className="glass-panel max-w-4xl rounded-3xl border border-white/20 p-8 shadow-[0_24px_64px_-36px_rgba(37,99,235,0.65)] md:p-12">
