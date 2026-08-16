@@ -5,6 +5,7 @@ import HeroSection from "../components/home/HeroSection.jsx";
 import HexGrid from "../components/home/HexGrid.jsx";
 import StatsSection from "../components/home/StatsSection.jsx";
 import FeaturedShowcase from "../components/home/FeaturedShowcase.jsx";
+import OurShowcase from "../components/home/OurShowcase.jsx";
 import Testimonials from "../components/home/Testimonials.jsx";
 import CTASection from "../components/home/CTASection.jsx";
 
@@ -17,18 +18,10 @@ export default function Home() {
       <div className="relative z-20">
         <HexGrid />
         <FeaturedShowcase />
+        <OurShowcase />
         <StatsSection />
 
-        <section className="relative overflow-hidden border-y border-white/10 py-20 sm:py-24">
-          <div className="absolute inset-0">
-            <img
-              src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1800&q=80"
-              alt="Mission background"
-              loading="lazy"
-              className="h-full w-full object-cover opacity-35"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/85 to-blue-950/90" />
-          </div>
+        <section className="relative overflow-hidden border-y border-white/10 bg-transparent py-20 sm:py-24">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

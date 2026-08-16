@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { LOGO_PATH, SITE_NAME } from "../constants/site.js";
 
@@ -10,8 +10,30 @@ const links = [
   { to: "/contact", label: "Contact" },
 ];
 
+const SHOWCASE_HASH = "#showcase";
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const goToShowcase = (e) => {
+    e.preventDefault();
+    setOpen(false);
+
+    const scrollToSection = () => {
+      document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    if (location.pathname === "/") {
+      window.history.replaceState(null, "", SHOWCASE_HASH);
+      scrollToSection();
+      return;
+    }
+
+    navigate({ pathname: "/", hash: "showcase" });
+    window.setTimeout(scrollToSection, 100);
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
@@ -37,6 +59,13 @@ export default function Navbar() {
               {label}
             </NavLink>
           ))}
+          <a
+            href={`/${SHOWCASE_HASH}`}
+            onClick={goToShowcase}
+            className="ml-2 inline-flex items-center rounded-lg border border-cyan-400/40 bg-cyan-500/15 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-cyan-100 transition hover:bg-cyan-500/25 hover:text-white"
+          >
+            OUR SHOWCASE
+          </a>
         </nav>
 
         <button
@@ -66,6 +95,13 @@ export default function Navbar() {
                 {label}
               </NavLink>
             ))}
+            <a
+              href={`/${SHOWCASE_HASH}`}
+              onClick={goToShowcase}
+              className="mt-2 inline-flex items-center justify-center rounded-lg border border-cyan-400/40 bg-cyan-500/15 px-3 py-3 text-xs font-semibold tracking-[0.14em] text-cyan-100 transition hover:bg-cyan-500/25"
+            >
+              OUR SHOWCASE
+            </a>
           </nav>
         </div>
       )}

@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const DEFAULT_TILT = { rotateX: 0, rotateY: 0 };
 
-export default function HexCard({ title, image, index }) {
+export default function HexCard({ title, image, index, hologram = false }) {
   const [tilt, setTilt] = useState(DEFAULT_TILT);
   const reduceMotion = useReducedMotion();
 
@@ -17,8 +17,8 @@ export default function HexCard({ title, image, index }) {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    const rotateX = ((y / rect.height - 0.5) * -10).toFixed(2);
-    const rotateY = ((x / rect.width - 0.5) * 10).toFixed(2);
+    const rotateX = ((y / rect.height - 0.5) * -6).toFixed(2);
+    const rotateY = ((x / rect.width - 0.5) * 6).toFixed(2);
 
     setTilt({ rotateX: Number(rotateX), rotateY: Number(rotateY) });
   };
@@ -27,39 +27,59 @@ export default function HexCard({ title, image, index }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
-      whileHover={reduceMotion ? { scale: 1.02 } : { scale: 1.05 }}
+      whileHover={reduceMotion ? { scale: 1.015 } : { scale: 1.035 }}
+      transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="hex-shape group relative h-48 w-44 overflow-hidden border border-white/20 bg-slate-900 md:h-56 md:w-52"
+      className={`hex-shape group relative h-36 w-32 overflow-hidden border sm:h-40 sm:w-36 md:h-44 md:w-40 ${
+        hologram
+          ? "holo-card border-cyan-300/40 bg-slate-900"
+          : "border-white/20 bg-slate-900"
+      }`}
       style={{
         transformStyle: "preserve-3d",
         transform: reduceMotion
           ? "none"
           : `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-        transition: "transform 380ms ease, box-shadow 380ms ease",
-        boxShadow:
-          "0 0 0 1px rgba(255,255,255,0.12), 0 14px 30px -18px rgba(59,130,246,0.45), 0 0 40px -24px rgba(56,189,248,0.65)",
+        transition: "transform 520ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 520ms ease",
+        boxShadow: hologram
+          ? "0 0 0 1px rgba(103,232,249,0.35), 0 0 28px rgba(34,211,238,0.35), 0 14px 30px -18px rgba(59,130,246,0.45)"
+          : "0 0 0 1px rgba(255,255,255,0.12), 0 14px 30px -18px rgba(59,130,246,0.45), 0 0 40px -24px rgba(56,189,248,0.65)",
+        animationDelay: hologram ? `${index * 0.18}s` : undefined,
       }}
     >
       <img
         src={image}
         alt={title}
         loading="lazy"
-        className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+        className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-950/60 to-slate-950/95 transition group-hover:from-slate-900/20" />
-      <div className="absolute inset-x-0 bottom-0 p-4 text-center">
-        <h3 className="text-sm font-semibold leading-tight text-white md:text-base">{title}</h3>
+      <div className="absolute inset-0 bg-slate-950/70 transition duration-500 group-hover:bg-slate-950/60" />
+      {hologram ? (
+        <>
+          <div className="holo-scan pointer-events-none absolute inset-0 mix-blend-screen" aria-hidden />
+          <div className="holo-flicker pointer-events-none absolute inset-0 bg-cyan-300/10 mix-blend-overlay" aria-hidden />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent 0%, rgba(34,211,238,0.16) 48%, transparent 52%, transparent 100%)",
+              backgroundSize: "100% 220%",
+              animation: reduceMotion ? "none" : "holoSweep 5.5s ease-in-out infinite",
+              animationDelay: `${index * 0.22}s`,
+            }}
+            aria-hidden
+          />
+        </>
+      ) : null}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center">
+        <h3 className="text-xs font-semibold leading-tight text-white sm:text-sm">{title}</h3>
         <Link
           to="/services"
-          className="mt-2 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-cyan-300 transition group-hover:text-cyan-200"
+          className="mt-1.5 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-300 transition group-hover:text-cyan-200 sm:text-xs"
         >
           Learn More
-          <ArrowUpRight className="h-3.5 w-3.5" />
+          <ArrowUpRight className="h-3 w-3" />
         </Link>
       </div>
     </motion.article>

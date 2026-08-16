@@ -14,23 +14,14 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative z-20 flex min-h-[calc(100vh-5rem)] items-center overflow-hidden">
-      <motion.div
-        aria-hidden
-        className="hero-gradient absolute inset-0 z-0 opacity-55"
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.28),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.2),transparent_35%),radial-gradient(circle_at_50%_95%,rgba(14,165,233,0.16),transparent_40%)]" />
-
+    <section className="relative z-20 flex min-h-[calc(100vh-5rem)] items-center overflow-hidden bg-transparent">
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-        <div className="glass-panel max-w-4xl rounded-3xl border border-white/20 p-8 shadow-[0_24px_64px_-36px_rgba(37,99,235,0.65)] md:p-12">
           <motion.p
             custom={0.05}
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200"
+            className="inline-flex items-center rounded-full border border-white/20 bg-slate-950/50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200 backdrop-blur-sm"
           >
             Premium Web & App Studio
           </motion.p>
@@ -39,16 +30,20 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl"
+            className="mt-6 max-w-4xl text-4xl font-bold leading-tight text-white drop-shadow-[0_2px_24px_rgba(2,6,23,0.85)] sm:text-5xl lg:text-6xl"
           >
-            Building Digital Experiences That Scale
+            Building
+            <br />
+            <span className="text-cyan-300">DIGITAL EXPERIENCES</span>
+            <br />
+            That <span className="text-cyan-300">SCALE</span>
           </motion.h1>
           <motion.p
             custom={0.35}
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mt-6 max-w-2xl text-lg text-slate-200/90 sm:text-xl"
+            className="mt-6 max-w-2xl text-lg text-slate-100 drop-shadow-[0_2px_16px_rgba(2,6,23,0.9)] sm:text-xl"
           >
             Websites. Apps. Growth.
           </motion.p>
@@ -70,18 +65,17 @@ export default function HeroSection() {
             <button
               type="button"
               onClick={openDefaultWhatsAppChat}
-              className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/50 bg-emerald-500/15 px-6 py-3 text-sm font-semibold text-emerald-100 transition hover:-translate-y-0.5 hover:bg-emerald-500/25"
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/50 bg-emerald-500/20 px-6 py-3 text-sm font-semibold text-emerald-100 transition hover:-translate-y-0.5 hover:bg-emerald-500/30"
             >
               Chat on WhatsApp
             </button>
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-slate-950/40 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-950/55"
             >
               View Services
             </Link>
           </motion.div>
-        </div>
       </div>
 
       <motion.a

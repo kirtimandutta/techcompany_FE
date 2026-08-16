@@ -4,7 +4,7 @@ import { openDefaultWhatsAppChat } from "../../lib/whatsapp.js";
 
 export default function CTASection() {
   return (
-    <section className="relative z-20 pb-24 pt-8">
+    <section className="relative z-20 bg-transparent pb-24 pt-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

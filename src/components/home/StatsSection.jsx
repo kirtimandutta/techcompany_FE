@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
 const stats = [
-  { label: "Projects Delivered", value: 50, suffix: "+" },
-  { label: "Happy Clients", value: 10, suffix: "+" },
-  { label: "Client Satisfaction", value: 99, suffix: "%" },
+  { label: "Projects Delivered", value: 2, suffix: "" },
+  { label: "Happy Clients", value: 2, suffix: "" },
+  { label: "Client Satisfaction", value: 100, suffix: "%" },
 ];
 
 function Counter({ value, suffix }) {
@@ -46,7 +46,7 @@ function Counter({ value, suffix }) {
 
 export default function StatsSection() {
   return (
-    <section className="border-y border-white/10 bg-slate-900/50 py-16 sm:py-20">
+    <section className="border-y border-white/10 bg-transparent py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
