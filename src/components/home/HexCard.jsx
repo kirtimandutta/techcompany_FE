@@ -52,6 +52,9 @@ export default function HexCard({ title, image, index, hologram = false }) {
         src={image}
         alt={title}
         loading="lazy"
+        decoding="async"
+        width={160}
+        height={176}
         className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-slate-950/70 transition duration-500 group-hover:bg-slate-950/60" />

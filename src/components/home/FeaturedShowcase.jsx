@@ -6,10 +6,11 @@ export function VideoProjectCard({ project, index = 0 }) {
   const videoRef = useRef(null);
   const cardRef = useRef(null);
   const inView = useInView(cardRef, { amount: 0.45, margin: "0px 0px -8% 0px" });
+  const nearView = useInView(cardRef, { amount: 0, margin: "280px 0px 280px 0px" });
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !nearView) return;
 
     video.playbackRate = 1.5;
 
@@ -23,7 +24,7 @@ export function VideoProjectCard({ project, index = 0 }) {
     } else {
       video.pause();
     }
-  }, [inView]);
+  }, [inView, nearView]);
 
   return (
     <motion.article
@@ -68,10 +69,10 @@ export function VideoProjectCard({ project, index = 0 }) {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
+          src={nearView ? project.src : undefined}
           className="aspect-video w-full rounded-xl border border-white/10 bg-slate-950 object-cover"
         >
-          <source src={project.src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

@@ -51,7 +51,7 @@ export default function OurShowcase() {
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">
             Our Work
           </p>
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">OUR SHOWCASE</h2>
+          <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">OUR SHOWCASE</h1>
           <p className="mt-4 text-slate-400">
             Selected builds from recent client launches across industries.
           </p>

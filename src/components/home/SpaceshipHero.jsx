@@ -242,8 +242,6 @@ function SpaceshipModel({ skipIntro = false, onIntroComplete, reduceMotion = fal
   );
 }
 
-useGLTF.preload(MODEL_PATH, false, true);
-
 export default function SpaceshipHero() {
   const [ready, setReady] = useState(false);
   const [phase, setPhase] = useState("boot"); // boot | intro | settled
@@ -259,11 +257,22 @@ export default function SpaceshipHero() {
       setPhase(reduceMotion ? "settled" : "intro");
     };
 
-    // Start sooner so the entrance flight can begin quickly.
-    const timer = window.setTimeout(enable, reduceMotion ? 50 : 120);
+    // Let the first paint finish before booting the WebGL scene.
+    let idleId = 0;
+    const timer = window.setTimeout(() => {
+      if (typeof window.requestIdleCallback === "function") {
+        idleId = window.requestIdleCallback(enable, { timeout: 600 });
+      } else {
+        enable();
+      }
+    }, reduceMotion ? 50 : 180);
+
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
+      if (idleId && typeof window.cancelIdleCallback === "function") {
+        window.cancelIdleCallback(idleId);
+      }
     };
   }, [reduceMotion]);
 
@@ -292,7 +301,7 @@ export default function SpaceshipHero() {
     >
       {ready ? (
         <Canvas
-          dpr={[1, 1.25]}
+          dpr={typeof window !== "undefined" && window.innerWidth < 768 ? [1, 1] : [1, 1.15]}
           camera={{ position: [0, 0.75, 8], fov: 34 }}
           gl={{
             antialias: false,

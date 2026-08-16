@@ -1,24 +1,26 @@
+import { lazy, Suspense } from "react";
 import SEO from "../components/SEO.jsx";
 import { motion } from "framer-motion";
-import SpaceshipHero from "../components/home/SpaceshipHero.jsx";
 import HeroSection from "../components/home/HeroSection.jsx";
 import HexGrid from "../components/home/HexGrid.jsx";
 import StatsSection from "../components/home/StatsSection.jsx";
 import FeaturedShowcase from "../components/home/FeaturedShowcase.jsx";
-import OurShowcase from "../components/home/OurShowcase.jsx";
 import Testimonials from "../components/home/Testimonials.jsx";
 import CTASection from "../components/home/CTASection.jsx";
+
+const SpaceshipHero = lazy(() => import("../components/home/SpaceshipHero.jsx"));
 
 export default function Home() {
   return (
     <div className="relative isolate">
       <SEO title="Website & App Development" />
-      <SpaceshipHero />
+      <Suspense fallback={null}>
+        <SpaceshipHero />
+      </Suspense>
       <HeroSection />
       <div className="relative z-20">
         <HexGrid />
         <FeaturedShowcase />
-        <OurShowcase />
         <StatsSection />
 
         <section className="relative overflow-hidden border-y border-white/10 bg-transparent py-20 sm:py-24">

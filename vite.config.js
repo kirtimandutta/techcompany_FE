@@ -3,6 +3,19 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    target: "es2020",
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ["three", "@react-three/fiber", "@react-three/drei", "maath"],
+          motion: ["framer-motion"],
+          gsap: ["gsap"],
+        },
+      },
+    },
+  },
   server: {
     port: 5173,
     proxy: {
