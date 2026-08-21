@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Target, Eye } from "lucide-react";
+import { Target, Eye, Linkedin } from "lucide-react";
 import SEO from "../components/SEO.jsx";
 import { SITE_NAME } from "../constants/site.js";
 
@@ -16,6 +16,7 @@ const team = [
   {
     name: "Kirtiman Dutta",
     role: "Engineering Lead",
+    linkedin: "https://in.linkedin.com/in/kirtimandutta",
     images: withLocalImageFallback(
       "kirtiman",
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
@@ -40,6 +41,7 @@ const team = [
   {
     name: "Adhiraj chakravorty",
     role: "Architect",
+    linkedin: "https://www.linkedin.com/in/adhirajse/",
     images: withLocalImageFallback(
       "adhiraj",
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
@@ -66,7 +68,20 @@ function TeamMemberCard({ member }) {
         />
       </div>
       <div className="p-4">
-        <p className="font-semibold text-white">{member.name}</p>
+        <div className="flex items-center gap-2">
+          <p className="font-semibold text-white">{member.name}</p>
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} on LinkedIn`}
+              className="inline-flex text-slate-400 opacity-60 transition-all duration-200 hover:text-cyan-300 hover:opacity-100"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+          )}
+        </div>
         <p className="text-sm text-slate-500">{member.role}</p>
       </div>
     </div>

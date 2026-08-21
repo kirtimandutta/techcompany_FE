@@ -4,21 +4,21 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "Tothyo.IT helped us launch our SaaS dashboard with clean architecture and measurable growth outcomes.",
-    name: "Faisal Rahman",
-    role: "Founder, ScaleBridge",
+      "Tothyo.IT rebuilt our entire platform architecture within 4 weeks. Scalability की प्रॉब्लम सॉल्व हो गई — we handled our festive traffic spike without a single hiccup.",
+    name: "Aarav Sharma",
+    role: "Founder & CTO, FinVeda",
   },
   {
     quote:
-      "Their team combined UI clarity and engineering speed. Our web app now converts better across all devices.",
-    name: "Nadia Karim",
-    role: "Head of Product, LoopTech",
+      "Their UI/UX sense combined with fast turnaround is rare. The new dashboard improved our client retention by 35% within the first month itself. ज़बरदस्त work by the team.",
+    name: "Pooja Deshmukh",
+    role: "Head of Product, BharatLogix",
   },
   {
     quote:
-      "From discovery to deployment, everything felt structured and premium. Support after launch has been excellent.",
-    name: "Arman Hossain",
-    role: "CEO, NovaCommerce",
+      "From initial sprint planning to production deployment, their communication was completely transparent. Post-launch support and bug fixes were resolved in record time.",
+    name: "Vikram Singhania",
+    role: "Co-Founder, QuickRetail India",
   },
 ];
 
